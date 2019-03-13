@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email
+
+  has_many :roles
+  has_many :blogs, through: :roles
 end
