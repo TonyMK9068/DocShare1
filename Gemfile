@@ -63,3 +63,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'haml-rails', '~> 2.0'
 gem 'devise', '~> 4.6', '>= 4.6.1'
+gem 'bootstrap', '~> 4.3.1'

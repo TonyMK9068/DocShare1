@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
 
 	def index
-		Blog.where(public: true)
+		current_user.blogs
 	end
 
 	def new
