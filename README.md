@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# DocShare1
+DocShare updated
+>>>>>>> 22b4b31df299be3b581cdd785222b0781dfa0b0d
