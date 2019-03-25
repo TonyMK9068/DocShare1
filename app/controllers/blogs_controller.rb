@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
 
 	def index
-		current_user.blogs
+		@blogs = current_user.blogs if user_signed_in?
 	end
 
 	def new
