@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_211932) do
+ActiveRecord::Schema.define(version: 2019_03_25_235046) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.integer "role_id"
     t.boolean "private"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_blogs_on_role_id"
+    t.string "main_image"
+    t.string "thumb_image"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_211932) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "blog_id"
+    t.index ["blog_id"], name: "index_roles_on_blog_id"
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 

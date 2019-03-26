@@ -1,5 +1,5 @@
 class Blog < ApplicationRecord
-  belongs_to :role
+  has_many :roles
 
   
 end
