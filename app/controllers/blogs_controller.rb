@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
 
 	def index
-		@blogs = current_user.blogs if user_signed_in?
+		@blogs = Blog.public_blogs.limit(5)
 	end
 
 	def new
