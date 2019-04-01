@@ -1,11 +1,13 @@
 .blog-post
-  %h2.blog-post-title= blog.title
+  %h2.blog-post-title= link_to blog.title, blog_path(blog)
   %p.blog-post-meta
     = blog.created_at.strftime("%A %d, %B %Y")
     by
-    %a{ :href => "#" }= Role.find_by_blog_id(blog.id).user.username
+    %a{ :href => "#" }= Role.where("blog_id = ?  AND description = ?", params[:id], "owner" ).first.user.username
 
     .blog_image= image_tag blog.main_image
+
+    %br
 
     %p= blog.body
   

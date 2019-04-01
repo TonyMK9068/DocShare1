@@ -1,0 +1,31 @@
+.container  
+  %h2 New Blog
+
+  .blog-form.row
+    
+    .col-md-8.form
+      
+      = form_with(model: @blog) do |f|
+      
+        .form-group 	  
+          = f.label :title, "Blog title:"
+          = f.text_field :title, class: "form-control"
+
+        .form-group 
+          = f.label :body, "Body:"
+          = f.text_area :body, class: "form-control", cols: 30, rows: 20
+
+        .form-group 
+          = f.label :private, "Set to private:"
+          = f.check_box :private, class: "form-control form-check"
+
+        .form-group 
+          = f.label :main_image, "Paste main image URL here:"
+          = f.text_field :main_image, class: "form-control"
+
+        .form-group 
+          = f.label :thumb_image, "Paste thumb image URL here:"
+          = f.text_field :thumb_image, class: "form-control"
+
+        .divider.form-group
+          = f.submit "Submit", class: "btn btn-primary blog-submit"

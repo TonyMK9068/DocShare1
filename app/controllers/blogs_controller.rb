@@ -1,20 +1,22 @@
 class BlogsController < ApplicationController
 
 	def index
-		@blogs = Blog.public_blogs.limit(5)
+		@blogs = Blog.public_blogs.last(5)
 	end
 
 	def new
 		@blog = Blog.new
+		
 	end
 
 	def create
-		@role = current_user.roles.build(description: "owner")
-		@blog = @role.build(params[:blog])
+		@blog = Blog.new(blog_params)
 
 		if @blog.save
+			role = @blog.roles.build(user_id: current_user.id, description: "owner")
+			role.save
 			flash[:notice] = 'Blog created successfully.'
-			redirect_to @blogs_path
+			redirect_to blog_path(@blog)
 		else
 			flash[:error] = 'Error saving page. Try again.'
 			render :new
@@ -52,4 +54,20 @@ class BlogsController < ApplicationController
 			render :index
 		end
 	end
+
+	private
+
+	def blog_params
+		params.require(:blog).permit(:id,
+																 :title,
+																 :body,
+																 :private,
+																 :main_image,
+																 :thumb_image,
+																 :role_attributes => [:id, 
+																 											:description, 
+																 											:user_id]
+																)
+	end
+
 end
