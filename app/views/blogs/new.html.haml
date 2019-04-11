@@ -5,7 +5,7 @@
     
     .col-md-8.form
       
-      = form_with(model: @blog) do |f|
+      = form_with model: @blog, local: true do |f|
       
         .form-group 	  
           = f.label :title, "Blog title:"
@@ -16,8 +16,8 @@
           = f.text_area :body, class: "form-control", cols: 30, rows: 20
 
         .form-group 
-          = f.label :private, "Set to private:"
-          = f.check_box :private, class: "form-control form-check"
+          = f.label :hidden, "Set to private:"
+          = f.radio_button  :hidden, value: "True",  class: "form-control"
 
         .form-group 
           = f.label :main_image, "Paste main image URL here:"

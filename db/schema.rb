@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_235046) do
+ActiveRecord::Schema.define(version: 2019_04_03_214444) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.boolean "private"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "main_image"

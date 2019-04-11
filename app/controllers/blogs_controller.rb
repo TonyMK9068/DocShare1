@@ -12,14 +12,16 @@ class BlogsController < ApplicationController
 	def create
 		@blog = Blog.new(blog_params)
 
-		if @blog.save
-			role = @blog.roles.build(user_id: current_user.id, description: "owner")
-			role.save
-			flash[:notice] = 'Blog created successfully.'
-			redirect_to blog_path(@blog)
-		else
-			flash[:error] = 'Error saving page. Try again.'
-			render :new
+		respond_to do |format|
+			if @blog.save
+				role = @blog.roles.build(user_id: current_user.id, description: "owner")
+				role.save
+			
+				format.html { redirect_to @blog, notice: 'Blog created successfully.' }
+			else
+				format.html { render :new,  error: 'Error saving page. Try again.' }
+				
+			end
 		end
 	end
 
@@ -29,13 +31,13 @@ class BlogsController < ApplicationController
 
 	def update
 		@blog = Blog.find(params[:id])
-
-		if @blog.update_attributes(params[:blog])
-			flash[:notice] = 'Blog updated successfully.'
-			redirect_to edit_blog_path(@blog)
-		else
-			flash[:error] = 'Error updating. Try again.'
-			render :index
+		respond_to do |format|
+			if @blog.update_attributes(params[:blog])
+				format.html { redirect_to @blog, notice: 'Blog updated successfully.' }
+			else
+				format.html { render :edit, error: 'Error updating. Try again.' }
+				
+			end
 		end
 	end
 
@@ -46,12 +48,13 @@ class BlogsController < ApplicationController
 	def destroy
 		@blog = Blog.find(params[:id])
 
-		if @blog.destroy
-			flash[:notice] = 'Blog successfully deleted.'
-			redirect_to blogs_path
-		else
-			flash[:error] = 'Error deleting blog. Try again.'
-			render :index
+		respond_to do |format|
+			if @blog.destroy
+				format.html { redirect_to blogs_path, notice: 'Blog successfully deleted.' }
+				
+			else
+				format.html { render :edit, error: 'Error deleting blog. Try again.' }
+			end
 		end
 	end
 
@@ -61,7 +64,7 @@ class BlogsController < ApplicationController
 		params.require(:blog).permit(:id,
 																 :title,
 																 :body,
-																 :private,
+																 :hidden,
 																 :main_image,
 																 :thumb_image,
 																 :role_attributes => [:id, 
